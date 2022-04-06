@@ -104,7 +104,6 @@ PointsTotal = 1000                      #[integer]  ???
 PointsMultiplier = 5                    #[integer]    ???
 AdrVersion = "2022"                     #[string]   ADR-Version
 ClassificationCode = "1"                #[string]   Gefahrgutklasse
-PackagingGroup = ""                     #[string]   ???
 IsExemptedQuantity = false              #[boolean]  Ist freigestellte Menge
 IsLimitedQuantity = true                #[boolean]  Ist limitierte Menge
 IsHightConsequences = true              #[boolean]  ???
