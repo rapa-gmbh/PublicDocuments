@@ -1,0 +1,114 @@
+Header = "Auftrag 1337"                 #[string]   Titel vom Auftragsreiter
+
+#Referenzen
+OrderId = "1337"                        #[string]   Alphanumerische Auftragsnummer
+DeliveryID = "1337-001"                 #[string]   Alphanumerische Lieferscheinnummer
+
+#Absenderprofil & Lieferadresse
+Shipper = "Standard"                    #[string]   Name des Absenderprofils
+Name = "Mustermann GmbH"                #[string]   Empfängername
+ContactName = "Max Mustermann"          #[string]   Name der Kontaktperson
+ContactPhone = "+04912345"              #[string]   Telefonnummer der Kontaktperson
+ContactEmail = "max.m@m-gmbh.xyz"       #[string]   Email-Adress der Kontaktperson
+Street = "Musterstraße 12"              #[string]   Straße und Hausnummer
+CountryCode = "DE"                      #[string]   ISO-Ländercode
+PostCode = "12345"                      #[string]   Postleitzahl
+City = "Musterstadt"                    #[string]   Stadt
+PrivateAddress = false                  #[boolean]  Ist privatadresse (Ja/Nein) => (true/false)
+NeutralName = "Musterfrau GmbH"         #[string]   Neutraler Empfängername
+NeutralStreet = "Musterstraße 21"       #[string]   Neutrale Straße und Hausnummer
+NeutralCountryCode = "DE"               #[string]   Neutraler ISO-Ländercode
+NeutralPostCode = "54321"               #[string]   Neutrale Postleitzahl
+NeutralCity = "Musterdorf"              #[string]   Neutrale Stadt
+
+#Versandart
+Delivery = "STANDARD"                   #[string]   Versandart (STANDARD/EXPRESS_8/EXPRESS_10/EXPRESS_12/EXPRESS_16/FIX/FIX_8/FIX_10/FIX_12/FIX_16/DIRECT)
+DeliveryDate = 2022-04-14T08:32:55.000Z #[Datetime] Lieferdatum (für unterstützte Formate siehe TOML-Dokumentation)
+PickupDate = 2022-04-12T10:45:32.000Z   #[Datetime] Abholdatum (Bei fehlender Angabe: der nächste Werktag)
+
+#Versanddetails
+Incoterm = "STANDARD"                   #[string]   Incoterm (EXW/STANDARD/DDP/INVOICE_TO_RECIPIENT/DAP_CLEARED/DAP_UNCLEARED/FOB)
+Premium = false                         #[boolean]  Premiumversand (Ja/Nein) => (true/false)
+TailLiftTruckPickup = true              #[boolean]  Abholung mit Ladebordwand (Ja/Nein) => (true/false)
+TailLiftTruckDelivery = true            #[boolean]  Auslieferung mit Ladebordwand (Ja/Nein) => (true/false)
+DeliveryWithoutPresence = true          #[boolean]  Abstellgenehmigung erteilen (Ja/Nein) => (true/false)
+ClimateNeutral = true                   #[boolean]  Klimaneutrale Auslieferung
+
+#Avisierung
+PickupAdvice = true                     #[boolean]  Abholavis, Kontaktaufnahme vor der Abholung (Ja/Nein) => (true/false)
+DeliveryAdvice = true                   #[boolean]  Lieferavis, vor Auslieferung Kontaktaufnahme beim Kunden (Ja/Nein) => (true/false)
+DriverAdvice = true                     #[boolean]  Fahreravis, kurz vor Asulieferung Anruf vom Fahrer beim Kunden (Ja/Nein) => (true/false)
+
+#Services
+Export = false                          #[boolean]  Exportanmeldung durch Spedition (Ja/Nein) => (true/false)
+Insurance = true                        #[boolean]  Sendung versichern (Ja/Nein) => (true/false)
+Value = 123                             #[integer]  Warenwert für Versicherung
+Currency = "EUR"                        #[string]   Währung (EUR/USD)
+Coupon = "WELCOME-CARGOBOARD-123"       #[string]   Coupon-Code
+
+#Benutzerobefläche
+ExpandReferences = true                 #[boolean]  Referenzen-Bereich aufklappen (Ja/Nein) => (true/false)
+ExpandDeliveryData = false              #[boolean]  Versanddaten-Bereich aufklappen (Ja/Nein) => (true/false)
+ExpandDeliveryType = true               #[boolean]  Versandart-Bereich aufklappen (Ja/Nein) => (true/false)
+ExpandDeliveryDetails = false           #[boolean]  Versanddetails-Bereich aufklappen (Ja/Nein) => (true/false)
+ExpandAdvices = false                   #[boolean]  Avisierung-Bereich aufklappen (Ja/Nein) => (true/false)
+ExpandServices = false                  #[boolean]  Service-Bereich aufklappen (Ja/Nein) => (true/false)
+ExpandNotes = false                     #[boolean]  Notizen-Bereich aufklappen (Ja/Nein) => (true/false)
+
+[[Notes]]                               #           Fügt die nachfolgende Notiz zur Liste hinzu
+Text = "Dies ist eine Notiz"            #[string]   Der text der Notiz
+Checked = false                         #[boolean]  Is abgehakt (Ja/Nein) => (true/false)
+
+[[Notes]]                               #           Fügt eine weitere Notiz zur Liste hinzu
+Text = "Meine 2. Notiz"                 
+Checked = true
+
+[[Packages]]                            #           Fügt das nachfolgende Packstück zur Liste hinzu
+Quantity = 1                            #[integer]  Anzahl identischer Packstücke mit folgenden Angabe
+Type = "KT"                             #[string]   Art des Packstücks (für weitere Typen-Codes siehe Benutzeroberfläche)
+Content = "Bananen"                     #[string]   Inhaltsangabe
+Length = 100                            #[integer]  Packstücklänge in cm
+Width = 10                              #[integer]  Packstückbreite in cm
+Height = 20                             #[integer]  Packstückhöhe in cm
+Weight = 22.3                           #[float]    Packstückgewicht in Kg
+Stackable = true                        #[boolean]  Packstück ist Stapelbar (Ja/Nein) => (true/false)
+PaletteExchange = false                 #[boolean]  Palettentausch bei Auslieferung (Ja/Nein) => (true/false)
+DatabaseKey = 1214                      #[integer]  (Nur für JTL relevant) Interne Paketnummer als Datenbankverweis (tVersand.kVersand)
+
+[[Packages]]                            #           Fügt ein weiteres Packstück zur Liste hinzu
+Quantity = 2                            
+Type = "KT"
+Content = "Gefährliche Bananen"
+Length = 90
+Width = 15
+Height = 25
+Weight = 32.1
+Stackable = false
+PaletteExchange = false
+DatabaseKey = 1215
+
+[[Packages.DangerousGoods]]             #           Fügt ein Gefahrgut zur Liste des Packstück hinzu
+UnNo = "00001"                          #[string]   UN-Nummer des Gefahrenguts
+SubstanceName = "Bananen"               #[string]   Name der Substanz
+PackageQuantity = 1                     #[integer]  ???
+PackageType = "KOMB"                    #[string]   Verpackungstyp
+Quantity = 1                            #[integer]  ???
+WeightGross = 16                        #[integer]    ???
+WeightNetOrVolume = 15                  #[integer]    ???
+WeightNetOrVolumeUnit = "KG"            #[string]   ???
+RiskAddition1 = ""                      #[string]   ???
+RiskAddition2 = ""                      #[string]   ???
+RiskAddition3 = ""                      #[string]   ???
+RiskMain = ""                           #[string]   ???
+PointsTotal = 1000                      #[integer]  ???
+PointsMultiplier = 5                    #[integer]    ???
+AdrVersion = "2022"                     #[string]   ADR-Version
+ClassificationCode = "1"                #[string]   Gefahrgutklasse
+PackagingGroup = ""                     #[string]   ???
+IsExemptedQuantity = false              #[boolean]  Ist freigestellte Menge
+IsLimitedQuantity = true                #[boolean]  Ist limitierte Menge
+IsHightConsequences = true              #[boolean]  ???
+NetExplosiveMass = "12.6"               #[float]    ???
+TransportCategory = ""                  #[string]   ???
+TunnelRestrictions = ""                 #[stirng]   ???
+TechnicalNameForNotOtherwiseSpecifiedSubstances = ""    #[string]   ???
