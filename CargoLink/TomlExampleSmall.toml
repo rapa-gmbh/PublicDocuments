@@ -1,0 +1,33 @@
+Header = "TOML-Besispiel-klein"                                                             #[string]   Titel vom Sendungsreiter
+
+#Referenzen
+OrderId = "TOML-1337"                                                                       #[string]   Alphanumerische Auftragsnummer
+DeliveryId = "TOML-1337-001"                                                                #[string]   Alphanumerische Lieferscheinnummer
+
+#Absenderprofil & Lieferadresse
+Shipper = "Standard"                                                                        #[string]   Name des Absenderprofils
+Name = "Consignee ABC AG"                                                                   #[string]   Empfängername
+ContactName = "Mr. Skywalker"                                                               #[string]   Name der Kontaktperson
+ContactPhone = "+4917287502631"                                                             #[string]   Telefonnummer der Kontaktperson
+ContactEmail = "orders@not-existing-company.com"                                            #[string]   Email-Adress der Kontaktperson
+Street = "Examplestreet 12a"                                                                #[string]   Straße und Hausnummer
+CountryCode = "DE"                                                                          #[string]   ISO-Ländercode
+PostCode = "10115"                                                                          #[string]   Postleitzahl
+City = "Berlin"                                                                             #[string]   Stadt
+PrivateAddress = false                                                                      #[boolean]  Ist privatadresse (Ja/Nein) => (true/false)
+
+#Versandart
+Delivery = "STANDARD"                                                                       #[string]   Versandart (STANDARD/EXPRESS_8/EXPRESS_10/EXPRESS_12/EXPRESS_16/FIX/FIX_8/FIX_10/FIX_12/FIX_16/DIRECT)
+PickupDate = 2022-04-12T10:45:32.000Z                                                       #[Datetime] Abholdatum (Bei fehlender Angabe: der nächste Werktag)
+
+[[Packages]]                                                                                #           Fügt das nachfolgende Packstück zur Liste hinzu
+Quantity = 1                                                                                #[integer]  Anzahl identischer Packstücke mit folgenden Angabe
+Type = "EP"                                                                                 #[string]   Art des Packstücks (für weitere Typen-Codes siehe Benutzeroberfläche)
+Content = "Accessories and battery"                                                         #[string]   Inhaltsangabe
+Length = 120                                                                                #[integer]  Packstücklänge in cm
+Width = 80                                                                                  #[integer]  Packstückbreite in cm
+Height = 120                                                                                #[integer]  Packstückhöhe in cm
+Weight = 250                                                                                #[float]    Packstückgewicht in Kg
+Stackable = true                                                                            #[boolean]  Packstück ist Stapelbar (Ja/Nein) => (true/false)
+PaletteExchange = true                                                                      #[boolean]  Palettentausch bei Auslieferung (Ja/Nein) => (true/false)
+DatabaseKey = 0                                                                             #[integer]  (Nur für JTL relevant) Interne Paketnummer als Datenbankverweis (tVersand.kVersand)
