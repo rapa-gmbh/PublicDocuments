@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImportOrder>
+  <Header>XML-Beispiel</Header>
+  <OrderId>XML-1337</OrderId>
+  <DeliveryId>XML-1337-001</DeliveryId>
+  <Shipper>Standard</Shipper>
+  <Name>Consignee ABC AG</Name>
+  <ContactName>Mr. Skywalker</ContactName>
+  <ContactPhone>+4917287502631</ContactPhone>
+  <ContactEmail>orders@not-existing-company.com</ContactEmail>
+  <Street>Examplestreet 12a</Street>
+  <CountryCode>DE</CountryCode>
+  <PostCode>10115</PostCode>
+  <City>Berlin</City>
+  <PrivateAddress>false</PrivateAddress>
+  <NeutralName>Selling Company ABC GmbH</NeutralName>
+  <NeutralStreet>Friedrichstraße 1</NeutralStreet>
+  <NeutralCountryCode>DE</NeutralCountryCode>
+  <NeutralPostCode>10115</NeutralPostCode>
+  <NeutralCity>Berlin</NeutralCity>
+  <Delivery>FIX</Delivery>
+  <DeliveryDate>2022-04-14T08:32:55.000Z</DeliveryDate>
+  <PickupDate>2022-04-12T10:45:32.000Z</PickupDate>
+  <Incoterm>STANDARD</Incoterm>
+  <Premium>false</Premium>
+  <TailLiftTruckPickup>true</TailLiftTruckPickup>
+  <TailLiftTruckDelivery>true</TailLiftTruckDelivery>
+  <DeliveryWithoutPresence>true</DeliveryWithoutPresence>
+  <ClimateNeutral>true</ClimateNeutral>
+  <PickupAdvice>false</PickupAdvice>
+  <DeliveryAdvice>false</DeliveryAdvice>
+  <DriverAdvice>false</DriverAdvice>
+  <Export>false</Export>
+  <Insurance>true</Insurance>
+  <Value>1000</Value>
+  <Currency>EUR</Currency>
+  <Coupon>WELCOME-CARGOBOARD-123</Coupon>
+  <ExpandReferences>true</ExpandReferences>
+  <ExpandDeliveryData>false</ExpandDeliveryData>
+  <ExpandDeliveryType>true</ExpandDeliveryType>
+  <ExpandDeliveryDetails>false</ExpandDeliveryDetails>
+  <ExpandAdvices>false</ExpandAdvices>
+  <ExpandServices>false</ExpandServices>
+  <ExpandNotes>false</ExpandNotes>
+  <Notes>
+    <ImportNote>
+      <Text>Das ist eine Notiz</Text>
+      <Checked>false</Checked>
+    </ImportNote>
+    <ImportNote>
+      <Text>Das ist eine abgehakte Notiz</Text>
+      <Checked>true</Checked>
+    </ImportNote>
+  </Notes>
+  <Packages>
+    <ImportPackage>
+      <Quantity>1</Quantity>
+      <Type>EP</Type>
+      <Content>Accessories and battery</Content>
+      <Length>120</Length>
+      <Width>80</Width>
+      <Height>120</Height>
+      <Weight>250</Weight>
+      <Stackable>true</Stackable>
+      <PaletteExchange>true</PaletteExchange>
+      <DatabaseKey>0</DatabaseKey>
+      <DangerousGoods>
+        <ImportDangerousGood>
+          <UnNo>2794</UnNo>
+          <SubstanceName>BATTERIES (ACCUMULATORS), WET, FILLED WITH ALKALIA, electric collectors</SubstanceName>
+          <TechnicalNameForNotOtherwiseSpecifiedSubstances>Batterien</TechnicalNameForNotOtherwiseSpecifiedSubstances>
+          <PackageQuantity>1</PackageQuantity>
+          <PackageType>KOMB</PackageType>
+          <Quantity>1</Quantity>
+          <WeightGross>100</WeightGross>
+          <WeightNetOrVolume>60</WeightNetOrVolume>
+          <WeightNetOrVolumeUnit>NGW</WeightNetOrVolumeUnit>
+          <RiskMain>8</RiskMain>
+          <RiskAddition1>1</RiskAddition1>
+          <RiskAddition2>2</RiskAddition2>
+          <RiskAddition3>3</RiskAddition3>
+          <PointsTotal>180</PointsTotal>
+          <PointsMultiplier>3</PointsMultiplier>
+          <AdrVersion>2022</AdrVersion>
+          <PackagingGroup>II</PackagingGroup>
+          <IsExemptedQuantity>false</IsExemptedQuantity>
+          <IsLimitedQuantity>false</IsLimitedQuantity>
+          <IsHighConsequences>false</IsHighConsequences>
+          <TransportCategory>2</TransportCategory>
+          <TunnelRestrictions>E</TunnelRestrictions>
+        </ImportDangerousGood>
+      </DangerousGoods>
+    </ImportPackage>
+    <ImportPackage>
+      <Quantity>2</Quantity>
+      <Type>KT</Type>
+      <Content>Bananas</Content>
+      <Length>90</Length>
+      <Width>15</Width>
+      <Height>25</Height>
+      <Weight>32.1</Weight>
+      <Stackable>true</Stackable>
+      <PaletteExchange>true</PaletteExchange>
+      <DatabaseKey>0</DatabaseKey>
+    </ImportPackage>
+  </Packages>
+</ImportOrder>

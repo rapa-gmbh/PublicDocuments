@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImportOrder>
+  <Header>XML-Beispiel-Klein</Header>
+  <OrderId>XML-1337</OrderId>
+  <DeliveryId>XML-1337-001</DeliveryId>
+  <Shipper>Standard</Shipper>
+  <Name>Consignee ABC AG</Name>
+  <ContactName>Mr. Skywalker</ContactName>
+  <ContactPhone>+4917287502631</ContactPhone>
+  <ContactEmail>orders@not-existing-company.com</ContactEmail>
+  <Street>Examplestreet 12a</Street>
+  <CountryCode>DE</CountryCode>
+  <PostCode>10115</PostCode>
+  <City>Berlin</City>
+  <PrivateAddress>false</PrivateAddress>
+  <Delivery>STANDARD</Delivery>
+  <PickupDate>2022-04-12T10:45:32.000Z</PickupDate>
+  <Packages>
+    <ImportPackage>
+      <Quantity>1</Quantity>
+      <Type>EP</Type>
+      <Content>Accessories and battery</Content>
+      <Length>120</Length>
+      <Width>80</Width>
+      <Height>120</Height>
+      <Weight>250</Weight>
+      <Stackable>true</Stackable>
+      <PaletteExchange>true</PaletteExchange>
+      <DatabaseKey>0</DatabaseKey>
+    </ImportPackage>
+  </Packages>
+</ImportOrder>
