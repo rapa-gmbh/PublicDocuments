@@ -76,28 +76,29 @@ PaletteExchange = true                                                          
 DatabaseKey = 0                                                                             #[integer]  (Nur für JTL relevant) Interne Paketnummer als Datenbankverweis (tVersand.kVersand)
 
 [[Packages.DangerousGoods]]                                                                 #           Fügt ein Gefahrgut zur Liste des Packstück hinzu
-UnNo = "2794"                                                                               #[string]   UN-Nummer des Gefahrenguts
-SubstanceName = "BATTERIES (ACCUMULATORS), WET, FILLED WITH ALKALIA, electric collectors"   #[string]   Name der Substanz
-TechnicalNameForNotOtherwiseSpecifiedSubstances = "Batterien"                               #[string]   
-PackageQuantity = 1                                                                         #[integer]  ???
+UnNo = "2794"                                                                               #[string]   Eindeutige Kennzeichnung des Gefahrguts
+SubstanceName = "BATTERIES (ACCUMULATORS), WET, FILLED WITH ALKALIA, electric collectors"   #[string]   Die offizielle Bezeichnung der Substanz
+TechnicalNameForNotOtherwiseSpecifiedSubstances = "Batterien"                               #[string]   Sonderbezeichnung
+PackageQuantity = 1                                                                         #[integer]  Anzahl der Gefahrgutpackstücke
 PackageType = "KOMB"                                                                        #[string]   Verpackungstyp
-Quantity = 1                                                                                #[integer]  ???
-WeightGross = 100                                                                           #[float]    ???
-WeightNetOrVolume = 60                                                                      #[float]    ???
-WeightNetOrVolumeUnit = "NGW"                                                               #[string]   ???
-RiskMain = "8"                                                                              #[string]   ???
+Quantity = 1                                                                                #[integer]  Anzahl Collis (Wie viele Packstücke sind innerhalb des Packstücks?)
+WeightGross = 100                                                                           #[float]    Bruttogewicht des Packstücks
+WeightNetOrVolume = 60                                                                      #[float]    Nettoewicht oder Volumen
+WeightNetOrVolumeUnit = "NGW"                                                               #[string]   Gewichts-, Volumeneinheit (Erfolgt die Angabe als Gewicht (NGW) oder als Volumen (LIT)
+RiskMain = "8"                                                                              #[string]   Klasse des Gafhrguts
 RiskAddition1 = "1"                                                                         #[string]
 RiskAddition2 = "2"                                                                         #[string]
 RiskAddition3 = "3"                                                                         #[string]
-PointsTotal = 180                                                                           #[integer]  ???
-PointsMultiplier = 3                                                                        #[float]    ???
+PointsTotal = 180                                                                           #[integer]  Gefahrgutpunkte
+PointsMultiplier = 3                                                                        #[float]    Multiplikatorwert zur Ermittlung der Gefahrgutpunkte
 AdrVersion = "2022"                                                                         #[string]   ADR-Version
-PackagingGroup = "II"                                                                       #[string]   ???
-IsExemptedQuantity = false                                                                  #[boolean]  Ist freigestellte Menge
-IsLimitedQuantity = false                                                                   #[boolean]  Ist limitierte Menge
-IsHighConsequences = false                                                                 #[boolean]  ???
-TransportCategory = "2"                                                                     #[string]   ???
-TunnelRestrictions = "E"                                                                    #[stirng]   ???
+PackagingGroup = "II"                                                                       #[string]   Verpackungsgruppe des Gefahrguts
+IsExemptedQuantity = false                                                                  #[boolean]  Fällt unter 'ExceptedQuantity'-Regeln
+IsLimitedQuantity = false                                                                   #[boolean]  Fällt unter 'LimitedQuantity'-Regeln
+IsHighConsequences = false                                                                  #[boolean]  Hoch entzündlich
+NetExplosiveMass = 20                                                                       #[integer]  Explosive Masse (Netto)
+TransportCategory = "2"                                                                     #[string]   Transportkategorie
+TunnelRestrictions = "E"                                                                    #[stirng]   Tunnelbeschränkungscode des Gefahrguts
 
 [[Packages]]                                                                                #           Fügt ein weiteres Packstück zur Liste hinzu
 Quantity = 2                            
