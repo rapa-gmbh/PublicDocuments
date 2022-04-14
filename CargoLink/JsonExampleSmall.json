@@ -1,0 +1,31 @@
+{
+    "Header" : "Json-Beispiel",
+    "OrderId" : "Json-1337",
+    "DeliveryId" : "Json-1337-001",
+    "Shipper" : "Standard",
+    "Name" : "Consignee ABC AG",
+    "ContactName" : "Mr. Skywalker",
+    "ContactPhone" : "+4917287502631",
+    "ContactEmail" : "orders@not-existing-company.com",
+    "Street" : "Examplestreet 12a",
+    "CountryCode" : "DE",
+    "PostCode" : "10115",
+    "City" : "Berlin",
+    "PrivateAddress" : false,
+    "Delivery" : "STANDARD",
+    "PickupDate" : "2022-04-12T10:45:32.000Z",
+    "Packages" : [
+        {
+            "Quantity" : 1,
+            "Type" : "EP",
+            "Content" : "Accessories and battery",
+            "Length" : 120,
+            "Width" : 80,
+            "Height" : 120,
+            "Weight" : 250,
+            "Stackable" : true,
+            "PaletteExchange" : true,
+            "DatabaseKey" : 0  
+        }
+    ]
+}
