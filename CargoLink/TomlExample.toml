@@ -102,7 +102,7 @@ TunnelRestrictions = "E"                                                        
 [[Packages]]                                                                                #           Fügt ein weiteres Packstück zur Liste hinzu
 Quantity = 2                            
 Type = "KT"
-Content = "Gefährliche Bananen"
+Content = "Bananas"
 Length = 90
 Width = 15
 Height = 25
