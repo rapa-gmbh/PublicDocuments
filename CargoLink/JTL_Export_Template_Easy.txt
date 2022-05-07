@@ -1,0 +1,56 @@
+{% comment -%}
+Im folgenden Definieren wir eine Exportvorlage für CargoLink.
+Um das Beispiel möglichst simpel zu halten geben wir nur einige wenige Felder für den Export an.
+Außerdem versuchen wir nur dann Fallunterscheidungen (if/else) zu verwenden, wenn dies wirklich erforderlich ist.
+
+Wenn sie möchten, können Sie an beliebiger Stelle weitere Felder benennen. Für eine Liste aller möglichen Angaben, sehen Sie bitte in die Dokumentation.
+{% endcomment -%}
+
+{%- comment  -%} 'Header' ist der Titel des Auftragsreiters im GUI und kann frei gewählt werden. Wir haben uns für die Lieferscheinnummer entschieden. {% endcomment -%}
+Header = "{{ Vorgang.Lieferschein.Belegnummer }}"
+
+{% comment  -%} Im folgenden definieren wir die Referenzen, also die zur Sendung gehörende Auftrags- und Lieferscheinnummern {% endcomment -%}
+OrderId = "{{ Vorgang.Lieferschein.Auftrag.Auftragsnummer }}"
+DeliveryId = "{{ Vorgang.Lieferschein.Belegnummer }}"
+
+{% comment  -%} Als nächstes legen wir das Absenderprofil fest. Bitte stellen Sie sicher, dass entweder ein Profil mit dem entsprechenden Namen ("Standard") in CargoLink erstellt wurde, oder tauschen Sie an dieser Stelle den Namen aus.{% endcomment -%}
+Shipper = "Standard"
+
+{%- comment  -%} Nun legen wir die Lieferadresse fest. Dabei müssen einige Werte zunächst ausgewärtet und abhängeig vom Ergebnis verschiedene Werte exportiert werden.{% endcomment -%}
+
+{%- comment  -%} Zunächst überprüfen wir ob es sich bei der Lieferadresse am ein Gewerbe handelt {% endcomment -%}
+{%- if Vorgang.Auftrag.Lieferadresse.Firma != null and Vorgang.Auftrag.Lieferadresse.Firma != '' -%}
+{% comment  -%} Wenn in der Lieferadresse ein Firmenname eingetragen ist, geben wir diesen als Empfängernamen an und legen für CargoLink fest, dass es sich nicht um eine private Adresse handelt. {% endcomment -%}
+Name= "{{ Vorgang.Auftrag.Lieferadresse.Firma }}"
+PrivateAddress = false
+{%- else -%}
+{% comment  -%} Ansonsten geben wir den in der Lieferadresse hinterlegten Vor- und Nachnamen als Empfängername an und legen fest, dass es sich um eine private Adresse handelt.{% endcomment -%}
+Name= "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Vorname }} {{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Name }}"
+PrivateAddress = true
+{%- endif -%}
+
+{%- comment  -%} Als nächsten definieren wir die Daten der Kontaktperson.{% endcomment -%}
+ContactName = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Vorname }} {{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Name }}"
+ContactEmail = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.EMail }}"
+
+{%- comment  -%}An dieser Stelle übergeben wir die Telefonnummer der Kontaktperson. Da JTL zwischen Festnetzt und Mobilnummern unterscheidet, versuchen wir zunächst die Handynummer anzugeben. Wenn diese nicht vorhanden ist, versuchen wir stattdessen die Festnetznummer zu exportieren.{% endcomment -%}
+{%- if Vorgang.Auftrag.Lieferadresse.Mobil != null and Vorgang.Auftrag.Lieferadresse.Mobil != "" -%}
+{% comment  -%}Es liegt eine Handynummer vor, die wir angeben können.{% endcomment -%}
+ContactPhone ="{{ Vorgang.Auftrag.Lieferadresse.Mobil }}"
+{%- elsif Vorgang.Auftrag.Lieferadresse.Telefon != null and Vorgang.Auftrag.Lieferadresse.Telefon != "" -%}
+{% comment  -%}Es liegt lediglich eine festnetznummer vor, die wir angeben können.{% endcomment -%}
+ContactPhone ="{{ Vorgang.Auftrag.Lieferadresse.Telefon }}"
+{%- endif -%}
+
+{%- comment -%} Wir fahren mit der Angabe der Lieferadresse fort {% endcomment -%}
+Street = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Straße }}"
+CountryCode = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.LandISO }}"
+PostCode = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.PLZ }}"
+City = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Ort }}"
+
+{% comment -%}Anschließend legen wir die Versandart fest. Sie haben die Auswahl aus STANDARD/EXPRESS_8/EXPRESS_10/EXPRESS_12/EXPRESS_16/FIX/FIX_8/FIX_10/FIX_12/FIX_16/DIRECT{% endcomment -%}
+Delivery = "Standard"
+{% comment -%}
+Wir verzichten auf die Angabe eines Abholtermins. Auf diese Weise wird automatisch der nächste Werktag angenommen.
+Wenn Sie in CargoLink für Ihr Absenderprofil des Bundesland ausgewählt haben, werden sogar Feiertage ausgeschlossen.
+{% endcomment -%}
