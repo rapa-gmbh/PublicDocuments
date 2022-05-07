@@ -80,9 +80,9 @@ Checked = false
 Text = "Bitte Packstücktyp kontrollieren!"
 Checked = false
 
-{% comment -%}Als nächsten möchten wir die Packstücke definieren. Dabei wollen wir genau so viele Packstücke erzeugen, wie es in JTL Pakete mit der entsprechenden Versandart gibt. Bitte stellen Sie siche dass der Name Ihrer Versandart "CargoBoard" lautet, oder passen Sie die nachfolgende Fallunterscheidung an.{% endcomment -%}
+{% comment -%}Als nächsten möchten wir die Packstücke definieren. Dabei wollen wir genau so viele Packstücke erzeugen, wie es in JTL Pakete mit der entsprechenden Versandart gibt. Bitte stellen Sie siche dass der Name Ihrer Versandart "Cargoboard" lautet, oder passen Sie die nachfolgende Fallunterscheidung an.{% endcomment -%}
 {% for paket in Vorgang.Lieferschein.Pakete -%}
-{%- if paket.Versandart.Name == "CargoBoard" -%}
+{%- if paket.Versandart.Name == "Cargoboard" -%}
 [[Packages]]
 Quantity = 1
 Type = "KT"
