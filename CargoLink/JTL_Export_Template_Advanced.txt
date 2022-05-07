@@ -1,0 +1,94 @@
+{% comment -%}
+Im folgenden Definieren wir eine Exportvorlage für CargoLink.
+Dabei werden wir versuchen möglichst viele Felder für den Export zu definieren.
+Um in einem sinnvollen Rahmen zu bleiben werden wir jedoch bei weitem nicht alle möglichen Felder abdecken können.
+
+Wenn Sie möchten können Sie beliebige Angaben entfernen oder Weitere hinzufügen.
+Für eine Auswahl aller möglichen Angaben sehen Sie bitte in die Dokumentation.
+{% endcomment -%}
+
+{%- comment  -%} 'Header' ist der Titel des Auftragsreiters im GUI und kann frei gewählt werden. Wir haben uns für die Lieferscheinnummer entschieden. {% endcomment -%}
+Header = "{{ Vorgang.Lieferschein.Belegnummer }}"
+
+{% comment  -%} Im folgenden definieren wir die Referenzen, also die zur Sendung gehörende Auftrags- und Lieferscheinnummern {% endcomment -%}
+OrderId = "{{ Vorgang.Lieferschein.Auftrag.Auftragsnummer }}"
+DeliveryId = "{{ Vorgang.Lieferschein.Belegnummer }}"
+
+{% comment  -%} Als nächstes legen wir das Absenderprofil fest. Bitte stellen Sie sicher, dass entweder ein Profil mit dem entsprechenden Namen ("Standard") in CargoLink erstellt wurde, oder tauschen Sie an dieser Stelle den Namen aus.{% endcomment -%}
+Shipper = "Standard"
+
+{%- comment  -%} Nun legen wir die Lieferadresse fest. Dabei müssen einige Werte zunächst ausgewärtet und abhängeig vom Ergebnis verschiedene Werte exportiert werden.{% endcomment -%}
+
+{%- comment  -%} Zunächst überprüfen wir ob es sich bei der Lieferadresse am ein Gewerbe handelt {% endcomment -%}
+{%- if Vorgang.Auftrag.Lieferadresse.Firma != null and Vorgang.Auftrag.Lieferadresse.Firma != '' -%}
+{% comment  -%} Wenn in der Lieferadresse ein Firmenname eingetragen ist, geben wir diesen als Empfängernamen an und legen für CargoLink fest, dass es sich nicht um eine private Adresse handelt. {% endcomment -%}
+Name= "{{ Vorgang.Auftrag.Lieferadresse.Firma }}"
+PrivateAddress = false
+{%- else -%}
+{% comment  -%} Ansonsten geben wir den in der Lieferadresse hinterlegten Vor- und Nachnamen als Empfängername an und legen fest, dass es sich um eine private Adresse handelt.{% endcomment -%}
+Name= "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Vorname }} {{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Name }}"
+PrivateAddress = true
+{%- endif -%}
+
+{%- comment  -%} Als nächsten definieren wir die Daten der Kontaktperson.{% endcomment -%}
+ContactName = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Vorname }} {{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Name }}"
+ContactEmail = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.EMail }}"
+
+{%- comment  -%}An dieser Stelle übergeben wir die Telefonnummer der Kontaktperson. Da JTL zwischen Festnetzt und Mobilnummern unterscheidet, versuchen wir zunächst die Handynummer anzugeben. Wenn diese nicht vorhanden ist, versuchen wir stattdessen die Festnetznummer zu exportieren.{% endcomment -%}
+{%- if Vorgang.Auftrag.Lieferadresse.Mobil != null and Vorgang.Auftrag.Lieferadresse.Mobil != "" -%}
+{% comment  -%}Es liegt eine Handynummer vor, die wir angeben können.{% endcomment -%}
+ContactPhone ="{{ Vorgang.Auftrag.Lieferadresse.Mobil }}"
+{%- elsif Vorgang.Auftrag.Lieferadresse.Telefon != null and Vorgang.Auftrag.Lieferadresse.Telefon != "" -%}
+{% comment  -%}Es liegt lediglich eine festnetznummer vor, die wir angeben können.{% endcomment -%}
+ContactPhone ="{{ Vorgang.Auftrag.Lieferadresse.Telefon }}"
+{%- endif -%}
+
+{%- comment -%} Wir fahren mit der Angabe der Lieferadresse fort {% endcomment -%}
+Street = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Straße }}"
+CountryCode = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.LandISO }}"
+PostCode = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.PLZ }}"
+City = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Ort }}"
+
+{% comment -%}Anschließend legen wir die Versandart fest. Sie haben die Auswahl aus STANDARD/EXPRESS_8/EXPRESS_10/EXPRESS_12/EXPRESS_16/FIX/FIX_8/FIX_10/FIX_12/FIX_16/DIRECT{% endcomment -%}
+Delivery = "Standard"
+
+{%- comment -%}Wir wünschen eine Abholung und Auslieferung mit einer Ladebordwand und möchten außerdem eine Abstellgenehmigung erteilen. Diese Versanddetailts legen wir wie folgt fest.{% endcomment -%}
+TailLiftTruckPickup = true
+TailLiftTruckDelivery = true
+DeliveryWithoutPresence = true
+
+{% comment  -%}In Sachen Kontaktaufname wünschen wir uns lediglich eine Lieferavis{% endcomment -%}
+DeliveryAdvice = true
+
+{% comment -%}Außerdem möchten wir an dieser Stelle unsere Sendung versichern. Dazu müssen die folgenden drei Felder angegeben werden.{% endcomment -%}
+Insurance = true
+Value = {{ Vorgang.Lieferschein.Summe0.Brutto | Round }}
+Currency = "EUR"
+
+{% comment  -%}Für den Kollegen im Versand sind lediglich die Referenzen, Adressdaten und Notizen relevant. Desswegen blenden wir alle anderen Felder im GUI aus.{% endcomment -%}
+ExpandDeliveryType = false
+ExpandDeliveryDetails = false
+ExpandAdvices = false
+ExpandServices = false
+
+{% comment -%}Leider können wir nicht immer die Beschaffenheit der Packstücke vorhersehen. Aus diesem Grund möchten wie den Versandmitarbeiter mittels Notizen daran erinner die Packstückangaben zu kontrollieren.{% endcomment -%}
+[[Notes]]
+Text = "Bitte Abmaße der Packstücke kontrollieren!"
+Checked = false
+
+[[Notes]]
+Text = "Bitte Packstücktyp kontrollieren!"
+Checked = false
+
+{% comment -%}Als nächsten möchten wir die Packstücke definieren. Dabei wollen wir genau so viele Packstücke erzeugen, wie es in JTL Pakete mit der entsprechenden Versandart gibt. Bitte stellen Sie siche dass der Name Ihrer Versandart "CargoBoard" lautet, oder passen Sie die nachfolgende Fallunterscheidung an.{% endcomment -%}
+{% for paket in Vorgang.Lieferschein.Pakete -%}
+{%- if paket.Versandart.Name == "CargoBoard" -%}
+[[Packages]]
+Quantity = 1
+Type = "KT"
+Content = "{{ Vorgang.Lieferschein.Pakete.ErstesObjekt.Hinweis }}"
+Weight = {{ Vorgang.Lieferschein.Pakete.ErstesObjekt.Gewicht | Nummer: '0.0', 'US' }}
+Stackable = true
+DatabaseKey = {{ Vorgang.Lieferschein.Pakete.ErstesObjekt.InternePaketnummer }}
+{%- endif -%}
+{% endfor -%}
