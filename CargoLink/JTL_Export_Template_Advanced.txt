@@ -20,9 +20,9 @@ Shipper = "Standard"
 {%- comment  -%} Nun legen wir die Lieferadresse fest. Dabei müssen einige Werte zunächst ausgewärtet und abhängeig vom Ergebnis verschiedene Werte exportiert werden.{% endcomment -%}
 
 {%- comment  -%} Zunächst überprüfen wir ob es sich bei der Lieferadresse am ein Gewerbe handelt {% endcomment -%}
-{%- if Vorgang.Auftrag.Lieferadresse.Firma != null and Vorgang.Auftrag.Lieferadresse.Firma != '' -%}
+{%- if Vorgang.Lieferschein.Auftrag.Lieferadresse.Firma != null and Vorgang.Lieferschein.Auftrag.Lieferadresse.Firma != '' -%}
 {% comment  -%} Wenn in der Lieferadresse ein Firmenname eingetragen ist, geben wir diesen als Empfängernamen an und legen für CargoLink fest, dass es sich nicht um eine private Adresse handelt. {% endcomment -%}
-Name= "{{ Vorgang.Auftrag.Lieferadresse.Firma }}"
+Name= "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Firma }}"
 PrivateAddress = false
 {%- else -%}
 {% comment  -%} Ansonsten geben wir den in der Lieferadresse hinterlegten Vor- und Nachnamen als Empfängername an und legen fest, dass es sich um eine private Adresse handelt.{% endcomment -%}
@@ -35,12 +35,12 @@ ContactName = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Vorname }} {{ Vorga
 ContactEmail = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.EMail }}"
 
 {%- comment  -%}An dieser Stelle übergeben wir die Telefonnummer der Kontaktperson. Da JTL zwischen Festnetzt und Mobilnummern unterscheidet, versuchen wir zunächst die Handynummer anzugeben. Wenn diese nicht vorhanden ist, versuchen wir stattdessen die Festnetznummer zu exportieren.{% endcomment -%}
-{%- if Vorgang.Auftrag.Lieferadresse.Mobil != null and Vorgang.Auftrag.Lieferadresse.Mobil != "" -%}
+{%- if Vorgang.Lieferschein.Auftrag.Lieferadresse.Mobil != null and Vorgang.Lieferschein.Auftrag.Lieferadresse.Mobil != "" -%}
 {% comment  -%}Es liegt eine Handynummer vor, die wir angeben können.{% endcomment -%}
-ContactPhone ="{{ Vorgang.Auftrag.Lieferadresse.Mobil }}"
-{%- elsif Vorgang.Auftrag.Lieferadresse.Telefon != null and Vorgang.Auftrag.Lieferadresse.Telefon != "" -%}
+ContactPhone ="{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Mobil }}"
+{%- elsif Vorgang.Lieferschein.Auftrag.Lieferadresse.Telefon != null and Vorgang.Lieferschein.Auftrag.Lieferadresse.Telefon != "" -%}
 {% comment  -%}Es liegt lediglich eine festnetznummer vor, die wir angeben können.{% endcomment -%}
-ContactPhone ="{{ Vorgang.Auftrag.Lieferadresse.Telefon }}"
+ContactPhone ="{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Telefon }}"
 {%- endif -%}
 
 {%- comment -%} Wir fahren mit der Angabe der Lieferadresse fort {% endcomment -%}
@@ -50,7 +50,7 @@ PostCode = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.PLZ }}"
 City = "{{ Vorgang.Lieferschein.Auftrag.Lieferadresse.Ort }}"
 
 {% comment -%}Anschließend legen wir die Versandart fest. Sie haben die Auswahl aus STANDARD/EXPRESS_8/EXPRESS_10/EXPRESS_12/EXPRESS_16/FIX/FIX_8/FIX_10/FIX_12/FIX_16/DIRECT{% endcomment -%}
-Delivery = "Standard"
+Delivery = "STANDARD"
 
 {%- comment -%}Wir wünschen eine Abholung und Auslieferung mit einer Ladebordwand und möchten außerdem eine Abstellgenehmigung erteilen. Diese Versanddetailts legen wir wie folgt fest.{% endcomment -%}
 TailLiftTruckPickup = true
@@ -86,9 +86,9 @@ Checked = false
 [[Packages]]
 Quantity = 1
 Type = "KT"
-Content = "{{ Vorgang.Lieferschein.Pakete.ErstesObjekt.Hinweis }}"
-Weight = {{ Vorgang.Lieferschein.Pakete.ErstesObjekt.Gewicht | Nummer: '0.0', 'US' }}
+Content = "{{ paket.Hinweis }}"
+Weight = {{ paket.Gewicht | Nummer: '0.0', 'US' }}
 Stackable = true
-DatabaseKey = {{ Vorgang.Lieferschein.Pakete.ErstesObjekt.InternePaketnummer }}
+DatabaseKey = {{ paket.InternePaketnummer }}
 {%- endif -%}
 {% endfor -%}
